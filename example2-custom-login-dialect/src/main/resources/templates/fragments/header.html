@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="header" class="header">
+    <a class="brand" th:href="@{/}">UTEShop</a>
+
+    <nav th:if="${#authorization.expression('isAuthenticated()')}">
+        <a th:href="@{/profile}">Profile</a>
+        <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/admin}">Admin</a>
+    </nav>
+
+    <div class="account" th:if="${#authorization.expression('isAuthenticated()')}">
+        <!-- Avatar: fall back to a default image when the user has none -->
+        <img class="avatar" alt="Avatar"
+             th:src="@{${#strings.isEmpty(#authentication.principal.images)
+                          ? '/images/avatar-default.svg'
+                          : #authentication.principal.images}}">
+
+        <strong th:text="${#authentication.principal.fullName}">Nguyễn Văn A</strong>
+        <span class="muted" th:text="'(' + ${#authentication.principal.username} + ')'">(nguyenvana)</span>
+        <span class="muted" th:text="${#authentication.principal.email}">email@gmail.com</span>
+        <span class="badge" th:text="${#authentication.principal.role}">ROLE_USER</span>
+
+        <form th:action="@{/logout}" method="post" style="display:inline">
+            <button class="link-button" type="submit">Đăng xuất</button>
+        </form>
+    </div>
+
+    <div th:unless="${#authorization.expression('isAuthenticated()')}">
+        <a th:href="@{/login}">Đăng nhập</a>
+    </div>
+</header>
+</body>
+</html>

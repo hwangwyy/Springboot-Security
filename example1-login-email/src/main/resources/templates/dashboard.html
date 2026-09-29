@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/layout :: head('Dashboard')}"></head>
+<body>
+<div th:replace="~{layouts/layout :: page(~{::main})}">
+    <main>
+        <h1>Dashboard (ADMIN)</h1>
+        <p>Chỉ tài khoản có role ADMIN mới xem được trang này.</p>
+    </main>
+</div>
+</body>
+</html>

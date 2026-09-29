@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title>Profile</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <h1>Thông tin tài khoản</h1>
+    <div class="card profile">
+        <img class="avatar" alt="Avatar"
+             th:src="@{${#strings.isEmpty(user.images) ? '/images/avatar-default.svg' : user.images}}">
+        <div>
+            <h2 th:text="${user.fullName}">Full name</h2>
+            <p>Username: <b th:text="${user.username}"></b></p>
+            <p>Email: <b th:text="${user.email}"></b></p>
+            <p>Role: <b th:text="${user.roleName}"></b></p>
+            <p>Trạng thái: <b th:text="${user.enabled ? 'ACTIVE' : 'INACTIVE'}"></b></p>
+        </div>
+    </div>
+    <p class="muted">Dữ liệu này được UserMapper (MapStruct) chuyển từ entity User sang UserDTO.</p>
+</main>
+</body>
+</html>
